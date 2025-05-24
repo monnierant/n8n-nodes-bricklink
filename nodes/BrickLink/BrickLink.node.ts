@@ -2,7 +2,7 @@ import { IExecuteFunctions, INodeExecutionData, INodeType, INodeTypeDescription,
 import { resourcesProperty } from './resources';
 import { BLColorProperties, getBLColorOperations } from './Ressources/BLColor.operations';
 import { Client } from 'bricklink-api';
-import { getBLCatalogueOperations } from './Ressources/BLCatalogue.operations';
+import { BLCatalogueProperties, getBLCatalogueOperations } from './Ressources/BLCatalogue.operations';
 
 export class BrickLink implements INodeType {
 	description: INodeTypeDescription = {
@@ -28,7 +28,8 @@ export class BrickLink implements INodeType {
 		properties: [
       resourcesProperty,
 			// Resources and operations will go here
-			...BLColorProperties
+			...BLColorProperties,
+			...BLCatalogueProperties
 		],
 	};
 

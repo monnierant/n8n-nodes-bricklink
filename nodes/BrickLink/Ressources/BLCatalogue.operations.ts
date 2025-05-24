@@ -2,7 +2,7 @@ import { IExecuteFunctions, INodeExecutionData, INodeProperties } from "n8n-work
 import {CatalogItem, Client} from 'bricklink-api';
 
 
-export const BLColorProperties: INodeProperties[] = [
+export const BLCatalogueProperties: INodeProperties[] = [
   {
     displayName: 'Operation',
     name: 'operation',
