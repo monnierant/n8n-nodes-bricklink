@@ -3,7 +3,7 @@ import { resourcesProperty } from './resources';
 import { BLColorProperties, getBLColorOperations } from './Ressources/BLColor.operations';
 import { Client } from 'bricklink-api';
 import { BLCatalogueProperties, getBLCatalogueOperations } from './Ressources/BLCatalogue.operations';
-import { BLSubsetProperties } from './Ressources/BLSubset.operations';
+import { BLSubsetProperties, getBLSubsetOperations } from './Ressources/BLSubset.operations';
 
 export class BrickLink implements INodeType {
 	description: INodeTypeDescription = {
@@ -60,6 +60,9 @@ export class BrickLink implements INodeType {
         case 'catalogueItem': 
           returnData.push(await getBLCatalogueOperations(this, client, operation));
           break;
+				case 'subset':		
+					returnData.push(await getBLSubsetOperations(this, client, operation));				
+					break;
       }
     }
 
