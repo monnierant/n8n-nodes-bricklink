@@ -1,6 +1,6 @@
 {
   "name": "n8n-nodes-bricklink",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "n8n community node package for BrickLink API",
   "keywords": [
     "n8n-community-node-package"
