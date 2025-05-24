@@ -40,7 +40,7 @@ export class BrickLink implements INodeType {
     const resource = this.getNodeParameter('resource', 0);
     const operation = this.getNodeParameter('operation', 0);
 
-    const credential = await this.getCredentials('BrickLinkApi');
+    const credential = await this.getCredentials('brickLinkApi');
 
     const client = new Client({
       consumer_key: credential?.consumerKey as string,
