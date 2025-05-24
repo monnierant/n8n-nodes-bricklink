@@ -21,7 +21,7 @@ export class BrickLink implements INodeType {
 		outputs: [NodeConnectionType.Main],
 		credentials: [
 			{
-				name: 'BrickLinkApi',
+				name: 'brickLinkApi',
 				required: true,
 			},
 		],

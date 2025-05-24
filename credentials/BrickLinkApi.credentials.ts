@@ -4,7 +4,7 @@ import {
 } from 'n8n-workflow';
 
 export class BrickLinkApi implements ICredentialType {
-  name = 'BrickLinkApi';
+  name = 'brickLinkApi';
   displayName = 'BrickLink API';
   documentationUrl = 'https://www.bricklink.com/v3/api.page?page=started';
   properties: INodeProperties[] = [
