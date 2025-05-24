@@ -1,5 +1,5 @@
 import { IExecuteFunctions, INodeExecutionData, INodeProperties } from "n8n-workflow";
-import {CatalogItem, Client} from 'bricklink-api';
+import { Client} from 'bricklink-api';
 import { BricklinkRequest } from "bricklink-api/dist/request";
 
 
