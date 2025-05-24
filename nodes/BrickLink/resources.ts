@@ -15,6 +15,10 @@ export const resourcesProperty: INodeProperties =
       name: 'Catalogue Item',
       value: 'catalogueItem',
     },
+    {
+      name: 'Subsets',
+      value: 'subset',
+    },
   ],
-  default: 'color',
+  default: 'catalogueItem',
 };

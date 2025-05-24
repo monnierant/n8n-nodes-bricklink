@@ -3,6 +3,7 @@ import { resourcesProperty } from './resources';
 import { BLColorProperties, getBLColorOperations } from './Ressources/BLColor.operations';
 import { Client } from 'bricklink-api';
 import { BLCatalogueProperties, getBLCatalogueOperations } from './Ressources/BLCatalogue.operations';
+import { BLSubsetProperties } from './Ressources/BLSubset.operations';
 
 export class BrickLink implements INodeType {
 	description: INodeTypeDescription = {
@@ -29,7 +30,8 @@ export class BrickLink implements INodeType {
       resourcesProperty,
 			// Resources and operations will go here
 			...BLColorProperties,
-			...BLCatalogueProperties
+			...BLCatalogueProperties,
+			...BLSubsetProperties,
 		],
 	};
 
