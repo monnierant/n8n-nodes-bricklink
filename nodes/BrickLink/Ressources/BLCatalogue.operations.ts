@@ -1,4 +1,4 @@
-import { IExecuteFunctions, INodeExecutionData, INodeProperties } from "n8n-workflow";
+import { IDataObject, IExecuteFunctions,  INodeProperties } from "n8n-workflow";
 import {CatalogItem, Client} from 'bricklink-api';
 
 
@@ -99,11 +99,11 @@ export const BLCatalogueProperties: INodeProperties[] = [
   },
 ]
 
-export async function getBLCatalogueOperations(node :IExecuteFunctions , client:Client,operation :string,index :number): Promise<INodeExecutionData[]>
+export async function getBLCatalogueOperations(node :IExecuteFunctions , client:Client,operation :string,index :number): Promise<IDataObject[]>
 {
   if (operation === 'getItem') {
     const item :CatalogItem = await client.getCatalogItem(node.getNodeParameter('catalogueItemType', index, '') as string, node.getNodeParameter('catalogueItemNumber', index, '') as string);
-    
+
       return [{
         json: {
           item

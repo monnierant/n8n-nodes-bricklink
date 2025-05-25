@@ -1,4 +1,4 @@
-import { IExecuteFunctions, INodeExecutionData, INodeProperties } from "n8n-workflow";
+import { IDataObject, IExecuteFunctions, INodeProperties } from "n8n-workflow";
 import { Client} from 'bricklink-api';
 import { PriceGuideOptions } from "bricklink-api/dist/catalogItem/priceGuide";
 
@@ -182,7 +182,7 @@ export const BLPriceGuideProperties: INodeProperties[] = [
   },
 ]
 
-export async function getBLPriceGuideOperations(node :IExecuteFunctions , client:Client,operation :string,index :number): Promise<INodeExecutionData[]>
+export async function getBLPriceGuideOperations(node :IExecuteFunctions , client:Client,operation :string,index :number): Promise<IDataObject[]>
 {
   if (operation === 'getPriceGuide') {
 

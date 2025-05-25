@@ -1,4 +1,4 @@
-import { IExecuteFunctions, INodeExecutionData, INodeType, INodeTypeDescription, NodeConnectionType, NodeOperationError } from 'n8n-workflow';
+import { IDataObject, IExecuteFunctions, INodeExecutionData, INodeType, INodeTypeDescription, NodeConnectionType, NodeOperationError } from 'n8n-workflow';
 import { resourcesProperty } from './resources';
 import { BLColorProperties, getBLColorOperations } from './Ressources/BLColor.operations';
 import { Client } from 'bricklink-api';
@@ -40,7 +40,7 @@ export class BrickLink implements INodeType {
   // The execute method will go here
   async execute(this: IExecuteFunctions): Promise<INodeExecutionData[][]> {
     const items = this.getInputData();
-    const returnData = [];
+    let returnData : IDataObject[] = [];
     const resource = this.getNodeParameter('resource', 0);
     const operation = this.getNodeParameter('operation', 0);
 
@@ -56,28 +56,26 @@ export class BrickLink implements INodeType {
     // For each item, make an API call to create a contact
     for (let i = 0; i < items.length; i++) {
       switch (resource) {
-        case 'color': 
-          returnData.push(await getBLColorOperations(this, client, operation,i));
+        case 'color':
+          returnData = [...returnData, ...await getBLColorOperations(this, client, operation,i)];
           break;
-        case 'catalogueItem': 
-          returnData.push(await getBLCatalogueOperations(this, client, operation,i));
+        case 'catalogueItem':
+          returnData = [...returnData, ...await getBLCatalogueOperations(this, client, operation,i)];
           break;
-				case 'subset':		
-					returnData.push(await getBLSubsetOperations(this, client, operation,i));				
+				case 'subset':
+          returnData = [...returnData, ...await getBLSubsetOperations(this, client, operation,i)];
 					break;
 				case 'priceGuide':
-					returnData.push(await getBLPriceGuideOperations(this, client, operation,i));
+          returnData = [...returnData, ...await getBLPriceGuideOperations(this, client, operation,i)];
 					break;
 				default:
-					throw new NodeOperationError(this.getNode(), `Resource ${resource} not supported`);			
+					throw new NodeOperationError(this.getNode(), `Resource ${resource} not supported`);
       }
     }
 
-    if (returnData.length === 0) {
-      returnData.push([]);
-    }
 
-    return returnData;
+
+    return [this.helpers.returnJsonArray(returnData)];
 	};
 
 }

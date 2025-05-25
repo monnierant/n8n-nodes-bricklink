@@ -1,4 +1,4 @@
-import { IExecuteFunctions, INodeExecutionData, INodeProperties } from "n8n-workflow";
+import { IDataObject, IExecuteFunctions, INodeProperties } from "n8n-workflow";
 import { Client} from 'bricklink-api';
 import { BricklinkRequest } from "bricklink-api/dist/request";
 
@@ -100,7 +100,7 @@ export const BLSubsetProperties: INodeProperties[] = [
   },
 ]
 
-export async function getBLSubsetOperations(node :IExecuteFunctions , client:Client,operation :string,index :number): Promise<INodeExecutionData[]>
+export async function getBLSubsetOperations(node :IExecuteFunctions , client:Client,operation :string,index :number): Promise<IDataObject[]>
 {
   if (operation === 'getItem') {
     const item = await client.send(new BricklinkRequest("GET", `/items/${node.getNodeParameter('subsetType', index, '') as string}/${node.getNodeParameter('subsetNumber', index , '') as string}/subsets`));

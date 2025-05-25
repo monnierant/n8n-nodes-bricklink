@@ -1,4 +1,4 @@
-import { IExecuteFunctions, INodeExecutionData, INodeProperties } from "n8n-workflow";
+import { IDataObject, IExecuteFunctions, INodeProperties } from "n8n-workflow";
 import {Client,  Color} from 'bricklink-api';
 import { BricklinkRequest } from "bricklink-api/dist/request";
 
@@ -50,7 +50,7 @@ export const BLColorProperties: INodeProperties[] = [
   }
 ]
 
-export async function getBLColorOperations(node :IExecuteFunctions , client:Client,operation :string,index :number): Promise<INodeExecutionData[]>
+export async function getBLColorOperations(node :IExecuteFunctions , client:Client,operation :string,index :number): Promise<IDataObject[]>
 {
   switch (operation) {
     case 'getColors': {
