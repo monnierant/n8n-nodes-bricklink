@@ -186,10 +186,19 @@ export async function getBLPriceGuideOperations(node :IExecuteFunctions , client
 {
   if (operation === 'getPriceGuide') {
 
-    const priceGuideParameters = node.getNodeParameter('priceGuideParameters', index, {}) as PriceGuideOptions;
+    const priceGuideParameters = node.getNodeParameter('priceGuideParameters', index, {}) as IDataObject;
 
+		const priceGuideOptions: PriceGuideOptions = new PriceGuideOptions({
+			color_id: (priceGuideParameters.color_id as number | null) ?? null,
+			country_code: (priceGuideParameters.country_code as string | null) ?? null,
+			currency_code: (priceGuideParameters.currency_code as string | null) ?? null,
+			guide_type: (priceGuideParameters.guide_type as string) ?? 'stock',
+			new_or_used: (priceGuideParameters.new_or_used as string) ?? 'N',
+			region: (priceGuideParameters.region as string | null) ?? null,
+			vat: (priceGuideParameters.vat as string) ?? 'N',
+		});
 
-    const prices = await client.getPriceGuide(node.getNodeParameter('priceGuideType', index, '') as string,node.getNodeParameter('priceGuideNumber', index , '') as string, priceGuideParameters);
+    const prices = await client.getPriceGuide(node.getNodeParameter('priceGuideType', index, '') as string,node.getNodeParameter('priceGuideNumber', index , '') as string, priceGuideOptions);
       return [{
         json: {
           prices,
