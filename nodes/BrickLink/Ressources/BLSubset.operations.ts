@@ -100,10 +100,10 @@ export const BLSubsetProperties: INodeProperties[] = [
   },
 ]
 
-export async function getBLSubsetOperations(node :IExecuteFunctions , client:Client,operation :string): Promise<INodeExecutionData[]>
+export async function getBLSubsetOperations(node :IExecuteFunctions , client:Client,operation :string,index :number): Promise<INodeExecutionData[]>
 {
   if (operation === 'getItem') {
-    const item = await client.send(new BricklinkRequest("GET", `/items/${node.getNodeParameter('subsetType', 0, '') as string}/${node.getNodeParameter('subsetNumber', 0, '') as string}/subsets`));
+    const item = await client.send(new BricklinkRequest("GET", `/items/${node.getNodeParameter('subsetType', index, '') as string}/${node.getNodeParameter('subsetNumber', index , '') as string}/subsets`));
       return [{
         json: {
           list: [...item]

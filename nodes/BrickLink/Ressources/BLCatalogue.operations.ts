@@ -99,14 +99,14 @@ export const BLCatalogueProperties: INodeProperties[] = [
   },
 ]
 
-export async function getBLCatalogueOperations(node :IExecuteFunctions , client:Client,operation :string): Promise<INodeExecutionData[]>
+export async function getBLCatalogueOperations(node :IExecuteFunctions , client:Client,operation :string,index :number): Promise<INodeExecutionData[]>
 {
   if (operation === 'getItem') {
-    const item :CatalogItem = await client.getCatalogItem(node.getNodeParameter('catalogueItemType', 0, '') as string, node.getNodeParameter('catalogueItemNumber', 0, '') as string);
+    const item :CatalogItem = await client.getCatalogItem(node.getNodeParameter('catalogueItemType', index, '') as string, node.getNodeParameter('catalogueItemNumber', index, '') as string);
     
       return [{
         json: {
-          ...item
+          item
         },
       }];
   }
