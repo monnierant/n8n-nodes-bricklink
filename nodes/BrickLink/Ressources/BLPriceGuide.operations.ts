@@ -18,7 +18,7 @@ export const BLPriceGuideProperties: INodeProperties[] = [
       {
         name: 'Get Price Guide Item',
         value: 'getPriceGuide',
-        action: 'Get the item price guide',
+        action: 'Get item price guide',
 
       },
     ],
