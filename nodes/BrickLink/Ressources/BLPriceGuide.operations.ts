@@ -16,13 +16,13 @@ export const BLPriceGuideProperties: INodeProperties[] = [
     },
     options: [
       {
-        name: 'Get Item',
-        value: 'getItem',
-        action: 'Get the item',
+        name: 'Get Price Guide Item',
+        value: 'getPriceGuide',
+        action: 'Get the item price guide',
 
       },
     ],
-    default: 'getItem',
+    default: 'getPriceGuide',
   },
   {
     displayName: 'Item Type',
@@ -70,7 +70,7 @@ export const BLPriceGuideProperties: INodeProperties[] = [
     displayOptions: {
       show: {
         operation: [
-          'getItem',
+          'getPriceGuide',
         ],
         resource: [
           'priceGuide',
@@ -88,7 +88,7 @@ export const BLPriceGuideProperties: INodeProperties[] = [
     displayOptions: {
       show: {
         operation: [
-          'getItem',
+          'getPriceGuide',
         ],
         resource: [
           'priceGuide',
@@ -108,7 +108,7 @@ export const BLPriceGuideProperties: INodeProperties[] = [
     displayOptions: {
       show: {
         operation: [
-          'getItem',
+          'getPriceGuide',
         ],
         resource: [
           'priceGuide',
@@ -184,7 +184,7 @@ export const BLPriceGuideProperties: INodeProperties[] = [
 
 export async function getBLPriceGuideOperations(node :IExecuteFunctions , client:Client,operation :string,index :number): Promise<INodeExecutionData[]>
 {
-  if (operation === 'getItem') {
+  if (operation === 'getPriceGuide') {
 
     const priceGuideParameters = node.getNodeParameter('priceGuideParameters', index, {}) as PriceGuideOptions;
 
