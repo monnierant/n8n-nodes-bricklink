@@ -1,9 +1,10 @@
-import { IExecuteFunctions, INodeExecutionData, INodeType, INodeTypeDescription, NodeConnectionType } from 'n8n-workflow';
+import { IExecuteFunctions, INodeExecutionData, INodeType, INodeTypeDescription, NodeConnectionType, NodeOperationError } from 'n8n-workflow';
 import { resourcesProperty } from './resources';
 import { BLColorProperties, getBLColorOperations } from './Ressources/BLColor.operations';
 import { Client } from 'bricklink-api';
 import { BLCatalogueProperties, getBLCatalogueOperations } from './Ressources/BLCatalogue.operations';
 import { BLSubsetProperties, getBLSubsetOperations } from './Ressources/BLSubset.operations';
+import { BLPriceGuideProperties, getBLPriceGuideOperations } from './Ressources/BLPriceGuide.operations';
 
 export class BrickLink implements INodeType {
 	description: INodeTypeDescription = {
@@ -32,6 +33,7 @@ export class BrickLink implements INodeType {
 			...BLColorProperties,
 			...BLCatalogueProperties,
 			...BLSubsetProperties,
+			...BLPriceGuideProperties,
 		],
 	};
 
@@ -55,14 +57,19 @@ export class BrickLink implements INodeType {
     for (let i = 0; i < items.length; i++) {
       switch (resource) {
         case 'color': 
-          returnData.push(await getBLColorOperations(this, client, operation));
+          returnData.push(await getBLColorOperations(this, client, operation,i));
           break;
         case 'catalogueItem': 
-          returnData.push(await getBLCatalogueOperations(this, client, operation));
+          returnData.push(await getBLCatalogueOperations(this, client, operation,i));
           break;
 				case 'subset':		
-					returnData.push(await getBLSubsetOperations(this, client, operation));				
+					returnData.push(await getBLSubsetOperations(this, client, operation,i));				
 					break;
+				case 'priceGuide':
+					returnData.push(await getBLPriceGuideOperations(this, client, operation,i));
+					break;
+				default:
+					throw new NodeOperationError(this.getNode(), `Resource ${resource} not supported`);			
       }
     }
 

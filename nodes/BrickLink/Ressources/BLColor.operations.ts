@@ -50,7 +50,7 @@ export const BLColorProperties: INodeProperties[] = [
   }
 ]
 
-export async function getBLColorOperations(node :IExecuteFunctions , client:Client,operation :string): Promise<INodeExecutionData[]>
+export async function getBLColorOperations(node :IExecuteFunctions , client:Client,operation :string,index :number): Promise<INodeExecutionData[]>
 {
   switch (operation) {
     case 'getColors': {
@@ -67,7 +67,7 @@ export async function getBLColorOperations(node :IExecuteFunctions , client:Clie
       });
     }
     case 'getColorById': {
-      const colorId = node.getNodeParameter('colorId', 0) as number; // Replace with actual color ID
+      const colorId = node.getNodeParameter('colorId', index) as number; // Replace with actual color ID
       const color: Color = await client.send(new BricklinkRequest("GET", `/colors/${colorId}`));
       return [{
         json: {
